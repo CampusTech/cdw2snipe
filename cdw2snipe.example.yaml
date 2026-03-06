@@ -1,0 +1,23 @@
+# Snipe-IT connection settings
+snipe-url: https://snipe.example.com
+snipe-token: your-api-token-here
+
+# Log level: trace, debug, info, warn, error
+log-level: info
+
+# Sync settings
+# xlsx:
+#   - orders2024.xlsx
+#   - orders2025.xlsx
+dry-run: false
+computers-only: false
+apple-only: false
+
+# Custom field mappings (populated by `cdw2snipe setup`)
+# Maps field display name to Snipe-IT db_column_name
+# custom-fields:
+#   "CDW: Order Date": _snipeit_cdw_order_date_1
+#   "CDW: Invoice Date": _snipeit_cdw_invoice_date_2
+#   "CDW: Purchaser": _snipeit_cdw_purchaser_3
+#   "CDW: Purchase Order #": _snipeit_cdw_purchase_order_4
+#   "CDW: Invoice #": _snipeit_cdw_invoice_5
