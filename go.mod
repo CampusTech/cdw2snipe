@@ -1,6 +1,6 @@
 module github.com/CampusTech/cdw2snipe
 
-go 1.25.0
+go 1.25.7
 
 require (
 	github.com/michellepellon/go-snipeit v0.0.0
