@@ -112,7 +112,7 @@ The tool expects a CDW orders export xlsx with the following columns:
 | Price | 14 | Unit price |
 | Serial # | 27 | Serial number(s), comma-separated |
 | MFG Name | 28 | Manufacturer name |
-| Ship Date | 31 | Ship date(s), comma-separated |
+| Ship Date | 31 | Ship date(s), comma-separated (optional) |
 
 ## Warranty Matching
 
