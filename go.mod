@@ -34,4 +34,4 @@ require (
 	golang.org/x/text v0.34.0 // indirect
 )
 
-replace github.com/michellepellon/go-snipeit => github.com/CampusTech/go-snipeit v0.0.0-20260305205441-22fdcce97d1f
+replace github.com/michellepellon/go-snipeit => github.com/CampusTech/go-snipeit v0.0.0-campustech.0.20260307055441-367f27b3aead

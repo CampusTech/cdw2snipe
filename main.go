@@ -598,6 +598,16 @@ func runSync(cmd *cobra.Command, args []string) error {
 			needsUpdate = true
 		}
 
+		// Check order number
+		if asset.OrderNumber != u.OrderNum {
+			logger.WithFields(log.Fields{
+				"current": asset.OrderNumber,
+				"new":     u.OrderNum,
+			}).Debug("Updating order number")
+			updateAsset.OrderNumber = u.OrderNum
+			needsUpdate = true
+		}
+
 		// Check and set CDW custom fields if mappings are configured
 		if len(customFieldMap) > 0 {
 			if updateAsset.CustomFields == nil {
