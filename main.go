@@ -17,6 +17,9 @@ import (
 	"github.com/xuri/excelize/v2"
 )
 
+// version is set at build time via -ldflags.
+var version = "dev"
+
 // Column indices (0-based) in the xlsx
 const (
 	colOrderNum    = 1
@@ -95,8 +98,9 @@ var computerCategories = map[string]bool{
 
 func main() {
 	rootCmd := &cobra.Command{
-		Use:   "cdw2snipe",
-		Short: "Update Snipe-IT assets with CDW order data from an xlsx export",
+		Use:     "cdw2snipe",
+		Short:   "Update Snipe-IT assets with CDW order data from an xlsx export",
+		Version: version,
 		Long: `cdw2snipe reads a CDW orders xlsx export and updates matching assets in Snipe-IT
 by serial number with purchase date, purchase cost, and warranty information.
 

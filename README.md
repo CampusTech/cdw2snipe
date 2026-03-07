@@ -2,6 +2,8 @@
 
 Import CDW order data from xlsx exports into [Snipe-IT](https://snipeitapp.com/) asset management.
 
+![Screenshot of a MacBook Pro asset synced from CDW into Snipe-IT](.github/assets/demo-asset.png)
+
 ## Features
 
 - Looks up assets in Snipe-IT by serial number and updates purchase date, purchase cost, and CDW-specific custom fields
@@ -13,13 +15,27 @@ Import CDW order data from xlsx exports into [Snipe-IT](https://snipeitapp.com/)
 
 ## Installation
 
+**Download a pre-built binary** (recommended) from the [latest release](https://github.com/CampusTech/cdw2snipe/releases/latest):
+
+```bash
+# macOS (Apple Silicon)
+curl -L https://github.com/CampusTech/cdw2snipe/releases/latest/download/cdw2snipe-darwin-arm64 -o cdw2snipe
+chmod +x cdw2snipe
+
+# Linux (amd64)
+curl -L https://github.com/CampusTech/cdw2snipe/releases/latest/download/cdw2snipe-linux-amd64 -o cdw2snipe
+chmod +x cdw2snipe
 ```
+
+Or install with Go:
+
+```bash
 go install github.com/CampusTech/cdw2snipe@latest
 ```
 
 Or build from source:
 
-```
+```bash
 git clone https://github.com/CampusTech/cdw2snipe.git
 cd cdw2snipe
 go build

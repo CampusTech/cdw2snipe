@@ -1,0 +1,59 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to release (e.g. v1.2.3)"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.inputs.tag || github.ref }}
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Build binaries
+        run: |
+          VERSION="${{ github.event.inputs.tag || github.ref_name }}"
+          LDFLAGS="-s -w -X main.version=${VERSION}"
+          GOOS=darwin  GOARCH=arm64 go build -ldflags "${LDFLAGS}" -o "dist/cdw2snipe-darwin-arm64"   .
+          GOOS=linux   GOARCH=amd64 go build -ldflags "${LDFLAGS}" -o "dist/cdw2snipe-linux-amd64"    .
+          GOOS=linux   GOARCH=arm64 go build -ldflags "${LDFLAGS}" -o "dist/cdw2snipe-linux-arm64"    .
+          GOOS=windows GOARCH=amd64 go build -ldflags "${LDFLAGS}" -o "dist/cdw2snipe-windows-amd64.exe" .
+
+      - name: Generate release notes
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          VERSION: ${{ github.event.inputs.tag || github.ref_name }}
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          PREV_TAG=$(git tag --sort=-version:refname | grep -v "^${VERSION}$" | head -1)
+          if [ -n "$PREV_TAG" ]; then
+            SINCE=$(git log -1 --format=%aI "${PREV_TAG}")
+          else
+            SINCE="1970-01-01T00:00:00Z"
+          fi
+          export SINCE
+          python3 .github/scripts/gen_release_notes.py "$VERSION" "$PREV_TAG" > release_notes.md
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.event.inputs.tag || github.ref_name }}
+          body_path: release_notes.md
+          files: dist/*
