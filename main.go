@@ -576,7 +576,7 @@ func runSync(cmd *cobra.Command, args []string) error {
 			logger.WithFields(log.Fields{
 				"current": existingCost,
 				"new":     totalPriceStr,
-			}).Info("Updating purchase cost")
+			}).Debug("Updating purchase cost")
 			updateAsset.PurchaseCost = totalPriceStr
 			needsUpdate = true
 		}
@@ -590,7 +590,7 @@ func runSync(cmd *cobra.Command, args []string) error {
 			logger.WithFields(log.Fields{
 				"current": existingDate,
 				"new":     purchaseDateStr,
-			}).Info("Updating purchase date")
+			}).Debug("Updating purchase date")
 			if updateAsset.CustomFields == nil {
 				updateAsset.CustomFields = make(map[string]string)
 			}
@@ -630,7 +630,7 @@ func runSync(cmd *cobra.Command, args []string) error {
 						"field":   fieldName,
 						"current": existingValue,
 						"new":     newValue,
-					}).Info("Updating custom field")
+					}).Debug("Updating custom field")
 					updateAsset.CustomFields[dbCol] = newValue
 					needsUpdate = true
 				}
