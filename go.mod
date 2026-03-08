@@ -3,7 +3,7 @@ module github.com/CampusTech/cdw2snipe
 go 1.25.7
 
 require (
-	github.com/michellepellon/go-snipeit v0.0.0
+	github.com/michellepellon/go-snipeit v0.0.0-20260308041334-b4baa85a4d8c
 	github.com/sirupsen/logrus v1.9.4
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/viper v1.21.0
@@ -33,5 +33,3 @@ require (
 	golang.org/x/sys v0.41.0 // indirect
 	golang.org/x/text v0.34.0 // indirect
 )
-
-replace github.com/michellepellon/go-snipeit => github.com/CampusTech/go-snipeit v0.0.0-campustech.0.20260307055441-367f27b3aead
