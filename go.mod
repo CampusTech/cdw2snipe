@@ -33,3 +33,5 @@ require (
 	golang.org/x/sys v0.41.0 // indirect
 	golang.org/x/text v0.34.0 // indirect
 )
+
+replace github.com/michellepellon/go-snipeit => github.com/CampusTech/go-snipeit v0.0.0-20260915014738-351fd889b7ba

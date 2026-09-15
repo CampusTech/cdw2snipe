@@ -570,14 +570,14 @@ func runSync(cmd *cobra.Command, args []string) error {
 		updateAsset := snipeit.Asset{}
 
 		// Check purchase cost
-		existingCost := strings.TrimSpace(asset.PurchaseCost)
+		existingCost := strings.TrimSpace(asset.PurchaseCost.String())
 		existingCostNorm := strings.ReplaceAll(existingCost, ",", "")
 		if existingCostNorm != totalPriceStr {
 			logger.WithFields(log.Fields{
 				"current": existingCost,
 				"new":     totalPriceStr,
 			}).Debug("Updating purchase cost")
-			updateAsset.PurchaseCost = totalPriceStr
+			updateAsset.PurchaseCost = snipeit.FlexString(totalPriceStr)
 			needsUpdate = true
 		}
 
